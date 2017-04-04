@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPG-SPELE-TEST-master.Plugins", "RPG-SPELE-TEST-master.Plugins.csproj", "{95BFED4A-B877-0D8D-4772-87EA7AD0E32F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPG-SPELE-TEST-master", "RPG-SPELE-TEST-master.csproj", "{3250460A-7F7E-6486-3713-1E9EE9742C7A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPG-SPELE-TEST-master.Editor.Plugins", "RPG-SPELE-TEST-master.Editor.Plugins.csproj", "{F7C1D5E5-887C-5464-8380-77873983BE06}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{95BFED4A-B877-0D8D-4772-87EA7AD0E32F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95BFED4A-B877-0D8D-4772-87EA7AD0E32F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95BFED4A-B877-0D8D-4772-87EA7AD0E32F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95BFED4A-B877-0D8D-4772-87EA7AD0E32F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3250460A-7F7E-6486-3713-1E9EE9742C7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3250460A-7F7E-6486-3713-1E9EE9742C7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3250460A-7F7E-6486-3713-1E9EE9742C7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3250460A-7F7E-6486-3713-1E9EE9742C7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7C1D5E5-887C-5464-8380-77873983BE06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7C1D5E5-887C-5464-8380-77873983BE06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7C1D5E5-887C-5464-8380-77873983BE06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7C1D5E5-887C-5464-8380-77873983BE06}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
