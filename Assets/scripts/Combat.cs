@@ -27,9 +27,9 @@ public class Combat : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (!isDead())
+        if (!IsDead())
         {
-            if (Input.GetMouseButton(0) && inRange())
+            if (Input.GetMouseButton(0) && InRange())
             {
                 GetComponent<Animation>().Play(attack.name);
                 ClickToMove.attack = true;
@@ -43,22 +43,22 @@ public class Combat : MonoBehaviour {
                 ClickToMove.attack = false;
                 impacted = false;
             }
-            impact();
+            Impact();
         }
         else
         {
-            dead();
+            Dead();
         }
     }
-    public void getHit(int damage)
+    public void GetHit(int damage)
     {
         health = Mathf.Clamp(health - damage, minHealth, maxHealth);
     }
-    public bool isDead()
+    public bool IsDead()
     {
         return (health <= 0);
     }
-    void dead()
+    void Dead()
     {
         if(!ended)
         {
@@ -77,18 +77,18 @@ public class Combat : MonoBehaviour {
             }
         }
     }
-    void impact()
+    void Impact()
     {
         if(enemy!=null && GetComponent<Animation>().IsPlaying(attack.name) && !impacted)
         {
             if (GetComponent<Animation>()[attack.name].time > GetComponent<Animation>()[attack.name].length * impactTime && GetComponent<Animation>()[attack.name].time < 0.9 * GetComponent<Animation>()[attack.name].length)
             {
-                enemy.GetComponent<Mob>().getHit(damage);
+                enemy.GetComponent<Mob>().GetHit(damage);
                 impacted = true;
             }
         }
     }
-    bool inRange()
+    bool InRange()
     {
         return enemy != null && (Vector3.Distance(enemy.transform.position, transform.position) <= range);
     }

@@ -22,9 +22,9 @@ public class ClickToMove : MonoBehaviour {
         {
             if (Input.GetMouseButton(1))
             {
-                locatePosition();
+                LocatePosition();
             }
-            moveToPosition();
+            MoveToPosition();
         }
         else
         {
@@ -32,18 +32,18 @@ public class ClickToMove : MonoBehaviour {
         }
 	}
 
-	void locatePosition () {
+	void LocatePosition () {
 		RaycastHit hit;
 		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 		if (Physics.Raycast (ray, out hit, 1000)) {
             if(hit.collider.tag!="Player" && hit.collider.tag!="Enemy")
             {
-                position = new Vector3(hit.point.x, 0, hit.point.z);
+                position = new Vector3(hit.point.x, hit.point.y, hit.point.z);
             }
 		}
 	}
 
-	void moveToPosition () {
+	void MoveToPosition () {
         if(Vector3.Distance(transform.position, position)>1) {
             Quaternion newRotation = Quaternion.LookRotation(position - transform.position, Vector3.forward);
             newRotation.x = 0f;

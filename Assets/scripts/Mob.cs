@@ -31,16 +31,16 @@ public class Mob : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if(!isDead())
+        if(!IsDead())
         {
-            if (!inRange())
+            if (!InRange())
             {
-                chase();
+                Chase();
             }
             else
             {
                 GetComponent<Animation>().Play(attackClip.name);
-                attack();
+                Attack();
 
                 if(GetComponent<Animation>()[attackClip.name].time > 0.9 * GetComponent<Animation>()[attackClip.name].length)
                 {
@@ -50,22 +50,22 @@ public class Mob : MonoBehaviour {
         }
         else
         {
-            dead();
+            Dead();
         }
 	}
-    void attack()
+    void Attack()
     {
         if (GetComponent<Animation>()[attackClip.name].time > GetComponent<Animation>()[attackClip.name].length * impactTime && GetComponent<Animation>()[attackClip.name].time < 0.9 * GetComponent<Animation>()[attackClip.name].length && !impacted)
         {
-            opponent.getHit(damage);
+            opponent.GetHit(damage);
             impacted = true;
         }
     }
-    public void getHit(int damage)
+    public void GetHit(int damage)
     {
         health = Mathf.Clamp(health - damage, minHealth, maxHealth);
     }
-    void dead()
+    void Dead()
     {
         GetComponent<Animation>().Play(die.name);
         if(GetComponent<Animation>()[die.name].time > 0.9 * GetComponent<Animation>()[die.name].length)
@@ -73,15 +73,15 @@ public class Mob : MonoBehaviour {
             Destroy(gameObject);
         }
     }
-    bool isDead()
+    bool IsDead()
     {
         return (health == 0);
     }
-    bool inRange ()
+    bool InRange ()
     {
         return Vector3.Distance(transform.position, player.position) < range;
     }
-    void chase ()
+    void Chase ()
     {
         transform.LookAt(player.position);
         controller.SimpleMove(transform.forward * speed);
