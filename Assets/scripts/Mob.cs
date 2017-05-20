@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//blabla
 public class Mob : MonoBehaviour {
 
     public float speed;
