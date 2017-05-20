@@ -16,12 +16,15 @@ public class Combat : MonoBehaviour {
     private bool impacted;
     public float range;
 
+	public bool inAction;
+	public bool specialAttack;
+
     bool started;
     bool ended;
 	// Use this for initialization
 	void Start () {
 		
-
+		health = maxHealth;
 
 	}
 	
@@ -29,30 +32,54 @@ public class Combat : MonoBehaviour {
 	void Update () {
         if (!IsDead())
         {
-            if (Input.GetMouseButton(0) && InRange())
-            {
-                GetComponent<Animation>().Play(attack.name);
-                ClickToMove.attack = true;
-                if (enemy != null)
-                {
-                    transform.LookAt(enemy.transform.position);
-                }
-            }
-            if (GetComponent<Animation>()[attack.name].time > 0.9 * GetComponent<Animation>()[attack.name].length)
-            {
-                ClickToMove.attack = false;
-                impacted = false;
-            }
-            Impact();
+			if (Input.GetKeyDown (KeyCode.Mouse0) && !specialAttack) 
+			{
+				inAction = true;
+			}
+			if (inAction) {
+				if (Attack (0, 1, KeyCode.Mouse0)) {
+				} else {
+					inAction = false;
+				}
+			}
         }
         else
         {
             Dead();
         }
     }
-    public void GetHit(int damage)
+	public bool Attack (int stunSeconds, double damageScale, KeyCode key) 
+	{
+		if (Input.GetKeyDown(key) && InRange())
+		{
+			GetComponent<Animation>().Play(attack.name);
+			ClickToMove.attack = true;
+			if (enemy != null)
+			{
+				transform.LookAt(enemy.transform.position);
+			}
+		}
+		if (GetComponent<Animation>()[attack.name].time > 0.9 * GetComponent<Animation>()[attack.name].length)
+		{
+			ClickToMove.attack = false;
+			impacted = false;
+			if (specialAttack) {
+				specialAttack = false;
+			}
+			return false;
+		}
+		Impact(stunSeconds, damageScale);
+		return true;
+	}
+	public void ResetAttack () 
+	{
+		ClickToMove.attack = false;
+		impacted = false;
+		GetComponent<Animation> ().Stop (attack.name);
+	}
+    public void GetHit(double damage)
     {
-        health = Mathf.Clamp(health - damage, minHealth, maxHealth);
+		health = Mathf.Clamp(health - (int)damage, minHealth, maxHealth);
     }
     public bool IsDead()
     {
@@ -77,13 +104,14 @@ public class Combat : MonoBehaviour {
             }
         }
     }
-    void Impact()
+	void Impact(int stunSeconds, double damageScale)
     {
         if(enemy!=null && GetComponent<Animation>().IsPlaying(attack.name) && !impacted)
         {
             if (GetComponent<Animation>()[attack.name].time > GetComponent<Animation>()[attack.name].length * impactTime && GetComponent<Animation>()[attack.name].time < 0.9 * GetComponent<Animation>()[attack.name].length)
             {
-                enemy.GetComponent<Mob>().GetHit(damage);
+                enemy.GetComponent<Mob>().GetHit(damage * damageScale);
+				enemy.GetComponent<Mob> ().GetStunned (stunSeconds);
                 impacted = true;
             }
         }
