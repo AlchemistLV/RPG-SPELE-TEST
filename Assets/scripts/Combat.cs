@@ -32,12 +32,12 @@ public class Combat : MonoBehaviour {
 	void Update () {
         if (!IsDead())
         {
-			if (Input.GetKeyDown (KeyCode.Mouse0) && !specialAttack) 
+			if (Input.GetKey (KeyCode.Mouse0) && !specialAttack) 
 			{
 				inAction = true;
 			}
 			if (inAction) {
-				if (Attack (0, 1, KeyCode.Mouse0)) {
+				if (Attack (0, 1, KeyCode.Mouse0, attack)) {
 				} else {
 					inAction = false;
 				}
@@ -48,18 +48,18 @@ public class Combat : MonoBehaviour {
             Dead();
         }
     }
-	public bool Attack (int stunSeconds, double damageScale, KeyCode key) 
+	public bool Attack (int stunSeconds, double damageScale, KeyCode key, AnimationClip animClip) 
 	{
-		if (Input.GetKeyDown(key) && InRange())
+		if (Input.GetKey(key) && InRange())
 		{
-			GetComponent<Animation>().Play(attack.name);
+			GetComponent<Animation>().Play(animClip.name);
 			ClickToMove.attack = true;
 			if (enemy != null)
 			{
 				transform.LookAt(enemy.transform.position);
 			}
 		}
-		if (GetComponent<Animation>()[attack.name].time > 0.9 * GetComponent<Animation>()[attack.name].length)
+		if (GetComponent<Animation>()[animClip.name].time > 0.9 * GetComponent<Animation>()[animClip.name].length)
 		{
 			ClickToMove.attack = false;
 			impacted = false;
@@ -68,7 +68,7 @@ public class Combat : MonoBehaviour {
 			}
 			return false;
 		}
-		Impact(stunSeconds, damageScale);
+		Impact(stunSeconds, damageScale, animClip);
 		return true;
 	}
 	public void ResetAttack () 
@@ -104,11 +104,11 @@ public class Combat : MonoBehaviour {
             }
         }
     }
-	void Impact(int stunSeconds, double damageScale)
+	void Impact(int stunSeconds, double damageScale, AnimationClip aClip)
     {
-        if(enemy!=null && GetComponent<Animation>().IsPlaying(attack.name) && !impacted)
+        if(enemy!=null && GetComponent<Animation>().IsPlaying(aClip.name) && !impacted)
         {
-            if (GetComponent<Animation>()[attack.name].time > GetComponent<Animation>()[attack.name].length * impactTime && GetComponent<Animation>()[attack.name].time < 0.9 * GetComponent<Animation>()[attack.name].length)
+            if (GetComponent<Animation>()[aClip.name].time > GetComponent<Animation>()[aClip.name].length * impactTime && GetComponent<Animation>()[aClip.name].time < 0.9 * GetComponent<Animation>()[aClip.name].length)
             {
                 enemy.GetComponent<Mob>().GetHit(damage * damageScale);
 				enemy.GetComponent<Mob> ().GetStunned (stunSeconds);

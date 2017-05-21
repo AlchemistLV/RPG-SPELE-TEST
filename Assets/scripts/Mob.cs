@@ -23,7 +23,7 @@ public class Mob : MonoBehaviour {
     public int minHealth;
     public int maxHealth;
 
-	private int stunTime;
+	private double stunTime;
 
     // Use this for initialization
     void Start () {
@@ -83,15 +83,15 @@ public class Mob : MonoBehaviour {
     {
         return Vector3.Distance(transform.position, player.position) < range;
     }
-	public void GetStunned(int seconds) 
+	public void GetStunned(double seconds) 
 	{
 		stunTime = seconds;
-		InvokeRepeating ("StunCountDown", 0f, 1f);
+		InvokeRepeating ("StunCountDown", 0f, 0.1f);
 
 	}
 	void StunCountDown() 
 	{
-		stunTime = stunTime - 1;
+		stunTime = stunTime - 0.1;
 		if (stunTime <= 0) {
 			CancelInvoke ("StunCountDown");
 		}

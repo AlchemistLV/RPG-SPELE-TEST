@@ -5,7 +5,9 @@ using UnityEngine;
 public class LevelSystem : MonoBehaviour {
 
 	public Combat player;
-	public int level;
+    public SpecialAttacks spAttack1;
+    public SpecialAttacks spAttack2;
+    public int level;
 	public int exp;
 
 
@@ -31,5 +33,8 @@ public class LevelSystem : MonoBehaviour {
 	void LevelEffect() {
 		player.maxHealth = 2 * player.maxHealth - 90;
 		player.damage = 2 * player.damage - 25;
-	}
+        spAttack1.cooldown = spAttack1.cooldown * 0.9;
+        spAttack2.cooldown = spAttack2.cooldown * 0.8;
+
+    }
 }
