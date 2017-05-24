@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ClickToMove : MonoBehaviour {
 	public float speed;
@@ -14,10 +15,15 @@ public class ClickToMove : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         position = transform.position;
-	}
+        die = false;
+    }
 	
 	// Update is called once per frame
 	void Update () {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("Main-Menu");
+        }
         if(!attack && !die)
         {
             if (Input.GetMouseButton(1))

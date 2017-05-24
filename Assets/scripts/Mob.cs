@@ -71,7 +71,7 @@ public class Mob : MonoBehaviour {
         GetComponent<Animation>().Play(die.name);
         if(GetComponent<Animation>()[die.name].time > 0.9 * GetComponent<Animation>()[die.name].length)
         {
-			playerLevel.exp = playerLevel.exp + 35;
+			playerLevel.exp = playerLevel.exp + playerLevel.expPerMob;
             Destroy(gameObject);
         }
     }

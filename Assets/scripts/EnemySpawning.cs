@@ -4,32 +4,33 @@ using UnityEngine;
 
 public class EnemySpawning : MonoBehaviour
 {
-    public Combat player;       // Reference to the player's heatlh.
-    public GameObject enemy;                // The enemy prefab to be spawned.
-    public float spawnTime = 10f;            // How long between each spawn.
-    public Transform[] spawnPoints;         // An array of the spawn points this enemy can spawn from.
+    public Combat player;      
+    public GameObject enemy;               
+    public float spawnTime = 10f;
+    public float spawnRate;
+    public Transform[] spawnPoints;       
 
 
     void Start()
     {
-        // Call the Spawn function after a delay of the spawnTime and then continue to call after the same amount of time.
+      
         InvokeRepeating("Spawn", spawnTime, spawnTime);
     }
 
 
     void Spawn()
     {
-        // If the player has no health left...
+        
         if (player.health <= 0f)
         {
-            // ... exit the function.
+            
             return;
         }
 
-        // Find a random index between zero and one less than the number of spawn points.
+        
         int spawnPointIndex = Random.Range(0, spawnPoints.Length);
 
-        // Create an instance of the enemy prefab at the randomly selected spawn point's position and rotation.
+        
         enemy.SetActive(true);
         Instantiate(enemy, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
         enemy.SetActive(false);

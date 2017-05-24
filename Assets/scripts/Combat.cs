@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 //blabla
 public class Combat : MonoBehaviour {
 
@@ -92,9 +93,10 @@ public class Combat : MonoBehaviour {
             GetComponent<Animation>().Play(dieClip.name);
             if (!started)
             {
+               // Destroy(gameObject);
                 ClickToMove.die = true;
-                Destroy(gameObject);
                 started = true;
+                SceneManager.LoadScene("Main-Menu");
             }
             if (started && !GetComponent<Animation>().IsPlaying(dieClip.name))
             {

@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class LevelSystem : MonoBehaviour {
 
 	public Combat player;
@@ -10,6 +9,7 @@ public class LevelSystem : MonoBehaviour {
     public SpecialAttacks spAttack2;
     public int level;
 	public int exp;
+    public int expPerMob;
 
 
 	// Use this for initialization
@@ -36,7 +36,7 @@ public class LevelSystem : MonoBehaviour {
 		player.damage = 2 * player.damage - 25;
         spAttack1.cooldown = spAttack1.cooldown * 0.9;
         spAttack2.cooldown = spAttack2.cooldown * 0.8;
-        enSpawn.spawnTime = enSpawn.spawnTime * 0.9f;
+        enSpawn.spawnTime = enSpawn.spawnTime * enSpawn.spawnRate;
 
     }
 }
